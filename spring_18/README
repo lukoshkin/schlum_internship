@@ -1,0 +1,106 @@
+Introduction
+============
+
+In this folder you can find some small programs developed for modeling
+a diffusion process with relaxation of gradient currents. The mechanism
+of relaxation is supposed to be immutable as well as the kind of boundary
+conditions. Since it characterize the problem being solved. All what does
+not change the problem statement is allowed to implement. And all what 
+does is not prohibited to perform, but there is no guarantee that after
+it the program will still work.
+
+Folder Structure
+================
+
+There are 2 subdirectories with .cpp files. The names (of directories 
+and/or files) are transparent and are given in the way to reflect what 
+the code implements or what you get as a result of execution. For example 
+directory analytical comprises all that is needed to construct the 
+analytical solution. 
+The same naming principle applies to the python files. 
+All of them are top-level relative to this folder. Two of them help make to
+drive the build process. The rest are responsible for graphical output.
+Makefile like any Makefile incorporates a set of directives for make to automate 
+a build process.
+The last file left to mention is set_all_params_here. It contains identifiers,
+values and definitions of the problem parameters. You can reset the values,
+but should not change the names and order in which they are.
+
+It is unlikely that you will need to change the settings of the graphical
+output. However you can configure file style.mplstyle which appears
+in the folder after the first successful call of 'make plot' or any call
+of 'make style'. And you can also find variable 'frames' at the end of 
+plot_evolution.py in order to set the number of frames (images). 
+
+
+Necessary Software
+==================
+
+If you are a Linux user you might not face any problem but GSL
+installation. We use its libraries to find zeros of the equation
+written in "analytical/iteration_function.cpp". So you may read about
+GSL and its installation here https://www.gnu.org/software/gsl/ or 
+you may write your own zero-finding algorithm (for instance pseudo-code  
+can be taken as a basis from here https://en.wikipedia.org/wiki/Brent%27s_method)
+[At worst, you can write to me (see the contacts at the end of the file), I will 
+send you my own versions of the algorithm]. In this case you should substitute 
+file "analytical/brents_method" by your algorithm (leaving the same name file or 
+correct all dependencies).
+
+Program compilation can proceed with the use of GNU make or manually with g++
+compiler (actually in both cases g++ is used, but make hides that from your eyes) 
+Either can be installed by typing:
+sudo apt-get install build-essential
+
+Python 3 is also needed. Download link: https://www.python.org/downloads/
+
+Other OS users have to do everything manually
+
+Compiling and Execution Stages
+===============================
+
+All problem parameters can be set at one place - in set_all_params_here file
+After setting the input you can compile programs exact_solution and
+analytical_solution with the command
+
+make
+
+To run them type program name with prefix ./ :
+
+./exact_solution
+./approximate_solution
+
+The number of time steps M, if hastily chosen, can prove not to cover the whole 
+evolution process. Since the execution of exact_solution for grids with a large 
+number of nodes becomes time-consuming much faster than approximate_solution, you 
+may want to increase M while retaining all values of obtained exact solution by 
+passing an integer argument to command ./exact_solution if all the other parameters 
+are set properly.
+
+./exact_solution 1000
+
+After it, make sure to rebuild approximate_solution and then run it.
+
+make                                            
+./approximate_solution
+
+From this moment you are able to plot the results of solutions. The images will
+appear in folder storage:
+
+make plot
+
+That's all. 
+Clean up the folder (bring it to its original state) with:
+
+make clean-all
+
+However other clean targets may be more appropriate. Read their rules/recipes in
+Makefile.
+
+Reporting Bugs
+==============
+
+If find something weird, write here
+
+lukoshkin@phystech.edu
+Vlad Lukoshkin

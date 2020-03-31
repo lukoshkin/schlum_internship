@@ -1,0 +1,28 @@
+scheme parameters
+=================
+ 
+N = 100
+M = 10
+l = 1 
+dt = 1E-3 
+tau = 0.1 
+D = 8 
+epsilon = 1E-6
+alpha = 1 
+beta = 1 
+delta = 1E-8
+u_special = 2
+
+parameters' definitions
+=======================
+
+# N             number of grid nodes along the x-axis
+# M             number of step along the t-axis to be made
+# l             dimension size (line segment on the x-axis)
+# dt            time step 
+# tau           relaxation time of gradient flows
+# D             diffusion coefficient
+# alpha          + \alpha (u(x,t) - u^*) - significance deegre of source term
+# beta          check for beta != 0  -  u_x(0) - \beta u(0) = 0
+# delta         the less it is, the better for you, but prevent it from taking zero value
+# u_special     u^* in term + \alpha (u(x,t) - u^*)       
